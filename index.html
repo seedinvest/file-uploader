@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Valum's File-Uploader v2.0 by Valums-File-Uploader</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Valum's File-Uploader v2.0</h1>
+          <h2>Multiple file upload plugin for HTML forms. User-friendly progress-bar + uploads via drag-and-drop. Coded in Javascript + AJAX, not Flash. Server-side PHP, Java, &amp; ColdFusion examples included.</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/Valums-File-Uploader/file-uploader/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/Valums-File-Uploader/file-uploader/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/Valums-File-Uploader/file-uploader" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h3>Valum's File Uploader v2.0</h3>
+
+<p>Welcome! This project attempts to achieve a user-friendly file-uploading experience over the web. 
+It's built as a Javascript plugin for developers looking to incorporate file-uploading into their website.</p>
+
+<p>This is a public fork of Valum's File Uploader (v1) in an attempt to incorporate some of the best 
+bugfixes and patches to make a version compatible with the latest browsers in 2012.</p>
+
+<p>We would love developers to contribute any improvements and bugfixes they produce.<br>
+See <a href="http://stackoverflow.com/questions/4384776/how-do-i-contribute-to-others-code-in-github">How do I contribute to other's code in GitHub?</a>.</p>
+
+<p>Initiated by <a href="https://github.com/SimonEast">SimonEast</a>, but interested maintainers are welcome.</p>
+
+<h3>Summary</h3>
+
+<p>This plugin uses an XMLHttpRequest (AJAX) for uploading multiple files with a progress-bar in 
+FF3.6+, Safari4+, Chrome and falls back to hidden-iframe-based upload in other browsers (namely IE), 
+providing good user experience everywhere.</p>
+
+<p>It does not use Flash, jQuery, or any external libraries.</p>
+
+<h4><a href="http://valums.com/files/2010/file-uploader/demo.htm">Original Demo by Valum</a></h4>
+
+<h3>Features</h3>
+
+<ul>
+<li>Multiple file select, progress-bar in FF, Chrome, Safari</li>
+<li>Drag-and-drop file select in FF, Chrome</li>
+<li>Uploads are cancellable</li>
+<li>No external dependencies</li>
+<li>Doesn't use Flash</li>
+<li>Fully working with HTTPS</li>
+<li>Keyboard support in FF, Chrome, Safari</li>
+<li>Tested in IE7/8, Firefox 3/3.6/4, Safari 4/5, Chrome, and Opera 10.60</li>
+</ul><h3>License</h3>
+
+<p>This plugin is open sourced under <a href="http://www.gnu.org/licenses/gpl-2.0.html">GNU GPL 2</a> or later and <a href="http://www.gnu.org/licenses/lgpl-2.1.html">GNU LGPL 2</a> or later.</p>
+
+<h3>Known Issues</h3>
+
+<p>Plugin breaks back button functionality in Opera.</p>
+
+<h3>Getting started</h3>
+
+<p>The <code>fileuploader.js</code> contains two classes that are meant to be used directly.
+If you need a complete upload widget (from demo) to quickly drop
+into your current design, use <code>qq.FileUploader</code>.</p>
+
+<p>If you want to customize uploader, by using a different looking file list
+or change the behaviour or functionality use <code>qq.FileUploaderBasic</code>.</p>
+
+<p>The difference between them is that <code>qq.FileUploader</code> provides a list of files,
+drag-and-drop, but <code>qq.FileUploaderBasic</code> only creates button and handles validation.
+Basic uploader is easier extendable, and doesn't limit possible customization.</p>
+
+<p><code>qq.FileUploader</code> extends <code>qq.FileUploaderBasic</code>, so that all the options present
+in the basic uploader also exist in the full widget.  </p>
+
+<h3>qq.FileUploader - Setting up full upload widget</h3>
+
+<p>Include <code>fileuploader.js</code> and <code>fileuploader.css</code> into your page.
+Create container element.</p>
+
+<div class="highlight">
+<pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"file-uploader"</span><span class="nt">&gt;</span>       
+<span class="nt">&lt;noscript&gt;</span>          
+    <span class="nt">&lt;p&gt;</span>Please enable JavaScript to use file uploader.<span class="nt">&lt;/p&gt;</span>
+    <span class="c">&lt;!-- or put a simple form for upload here --&gt;</span>
+<span class="nt">&lt;/noscript&gt;</span>         
+<span class="nt">&lt;/div&gt;</span>
+</pre>
+</div>
+
+
+<p>Initialize uploader when the DOM is ready. Change the action option.
+For example ../server/php.php for the default folder structure.
+In the server folder you will find examples for different platforms.
+If you can't find the one you need, check the readme.txt in the same folder. </p>
+
+<div class="highlight">
+<pre><span class="kd">var</span> <span class="nx">uploader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">qq</span><span class="p">.</span><span class="nx">FileUploader</span><span class="p">({</span>
+    <span class="c1">// pass the dom node (ex. $(selector)[0] for jQuery users)</span>
+    <span class="nx">element</span><span class="o">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'file-uploader'</span><span class="p">),</span>
+    <span class="c1">// path to server-side upload script</span>
+    <span class="nx">action</span><span class="o">:</span> <span class="s1">'/server/upload'</span>
+<span class="p">});</span> 
+</pre>
+</div>
+
+
+<h3>Options of both classes</h3>
+
+<div class="highlight">
+<pre>    <span class="c1">// url of the server-side upload script, should be on the same domain</span>
+    <span class="nx">action</span><span class="o">:</span> <span class="s1">'/server/upload'</span><span class="p">,</span>
+    <span class="c1">// additional data to send, name-value pairs</span>
+    <span class="nx">params</span><span class="o">:</span> <span class="p">{},</span>
+
+    <span class="c1">// validation    </span>
+    <span class="c1">// ex. ['jpg', 'jpeg', 'png', 'gif'] or []</span>
+    <span class="nx">allowedExtensions</span><span class="o">:</span> <span class="p">[],</span>        
+    <span class="c1">// each file size limit in bytes</span>
+    <span class="c1">// this option isn't supported in all browsers</span>
+    <span class="nx">sizeLimit</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">// max size   </span>
+    <span class="nx">minSizeLimit</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">// min size</span>
+
+    <span class="c1">// set to true to output server response to console</span>
+    <span class="nx">debug</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+
+    <span class="c1">// events         </span>
+    <span class="c1">// you can return false to abort submit</span>
+    <span class="nx">onSubmit</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">fileName</span><span class="p">){},</span>
+    <span class="nx">onProgress</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">fileName</span><span class="p">,</span> <span class="nx">loaded</span><span class="p">,</span> <span class="nx">total</span><span class="p">){},</span>
+    <span class="nx">onComplete</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">fileName</span><span class="p">,</span> <span class="nx">responseJSON</span><span class="p">){},</span>
+    <span class="nx">onCancel</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">fileName</span><span class="p">){},</span>
+    <span class="nx">onError</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">fileName</span><span class="p">,</span> <span class="nx">xhr</span><span class="p">){}</span>
+
+    <span class="nx">messages</span><span class="o">:</span> <span class="p">{</span>
+        <span class="c1">// error messages, see qq.FileUploaderBasic for content            </span>
+    <span class="p">},</span>
+    <span class="nx">showMessage</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">message</span><span class="p">){</span> <span class="nx">alert</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span> <span class="p">}</span>        
+</pre>
+</div>
+
+
+<p>Instance methods</p>
+
+<ul>
+<li><code>setParams(newParams)</code></li>
+</ul><h4>Changing alert/messages to something more user friendly</h4>
+
+<p>If you limited file types and max size, you will probably want to change the default alert and
+messages as you see fit, this is possible using showMessage callback and messages option.</p>
+
+<h4>Sending additional params</h4>
+
+<p>To add a parameter that will be passed as a query string with each upload use params option. </p>
+
+<div class="highlight">
+<pre>    <span class="kd">var</span> <span class="nx">uploader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">qq</span><span class="p">.</span><span class="nx">FileUploader</span><span class="p">({</span>
+        <span class="nx">element</span><span class="o">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'file-uploader'</span><span class="p">),</span>
+        <span class="nx">action</span><span class="o">:</span> <span class="s1">'/server-side.upload'</span><span class="p">,</span>
+        <span class="c1">// additional data to send, name-value pairs</span>
+        <span class="nx">params</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">param1</span><span class="o">:</span> <span class="s1">'value1'</span><span class="p">,</span>
+            <span class="nx">param2</span><span class="o">:</span> <span class="s1">'value2'</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+</pre>
+</div>
+
+
+<p>To change params based on the state of your app, use </p>
+
+<div class="highlight">
+<pre>    <span class="nx">uploader</span><span class="p">.</span><span class="nx">setParams</span><span class="p">({</span>
+       <span class="nx">anotherParam</span><span class="o">:</span> <span class="s1">'value'</span> 
+    <span class="p">});</span>
+</pre>
+</div>
+
+
+<p>It can be nicely used in <code>onSubmit</code> callback.      </p>
+
+<h4>Troubleshooting</h4>
+
+<p>If you can't get the uploader to work, please try the following steps
+before asking for help.</p>
+
+<p>If the upload doesn't complete, saying "failed":</p>
+
+<ul>
+<li>Set the <code>debug</code> option of the FileUploader to true.</li>
+<li>Open the page where you have a FileUploader.</li>
+<li>Open developer console in your browser.</li>
+<li>Try to upload the file. You should see a server serponse.</li>
+</ul><p>It should be <code>{success:true}</code> for completed requests. If it's not,
+then you have a problem with your server-side script.</p>
+
+<h4>Contributors</h4>
+
+<p>Thanks to everybody who contributed, either by sending bug reports or donating. And special thanks to:</p>
+
+<p>John Yeary<br>
+Sidney Maestre<br>
+Patrick Pfeiffer<br>
+Sean Sandy (SeanJA)<br>
+Andy Newby<br>
+Ivan Valles  </p>
+        </section>
+
+        <footer>
+          Valum's File-Uploader v2.0 is maintained by <a href="https://github.com/Valums-File-Uploader">Valums-File-Uploader</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
