@@ -44,6 +44,52 @@ See <a href="http://stackoverflow.com/questions/4384776/how-do-i-contribute-to-o
 
 <p>Initiated by <a href="https://github.com/SimonEast">SimonEast</a>, but interested maintainers are welcome.</p>
 
+<h3>Demo</h3>
+
+<!-- DEMO EXAMPLE BEGINS HERE -->
+
+	<!-- Please don't hotlink to these scripts here, as Github doesn't output correct HTTP headers
+		 for these files, and they will not be cached correctly -->
+	<script type="text/javascript" src="https://raw.github.com/Valums-File-Uploader/file-uploader/master/client/fileuploader.js"></script>
+	<link rel="stylesheet" href="stylesheets/fileuploader.css" media="screen"/>
+	<link rel="stylesheet" href="stylesheets/loading-animation.css" media="screen"/>
+	
+	<div id="file-uploader">
+		<noscript>          
+			<p>Please enable JavaScript to use file uploader.</p>
+			<!-- or put a simple form for upload here -->
+		</noscript>         
+	</div>
+	
+	<script type="text/javascript">
+	
+		// DOM-ready event is a much option here, just using onload in demo for simplicity
+		// jQuery users can use $(function()) { ...
+		window.onload = function() {
+		
+			var uploader = new qq.FileUploader({
+			
+				// pass the dom node (ex. $(selector)[0] for jQuery users)
+				element: document.getElementById('file-uploader'),
+				
+				// path to server-side upload script
+				// action: '/server/upload'
+				action: 'do-nothing.htm',
+				
+				// allowedExtensions: ['jpg'],
+				sizeLimit: 100000000,	// 100mb
+				minSizeLimit: 500,
+				
+				debug: true
+			}); 
+		};
+	
+	</script>
+
+<!-- DEMO EXAMPLE ENDS -->
+
+<p>(Hint: also try dragging and dropping files onto the button above)</p>
+
 <h3>Summary</h3>
 
 <p>This plugin uses an XMLHttpRequest (AJAX) for uploading multiple files with a progress-bar in 
@@ -58,6 +104,7 @@ providing good user experience everywhere.</p>
 
 <ul>
 <li>Multiple file select, progress-bar in FF, Chrome, Safari</li>
+<li>Fully stylable using basic CSS</li>
 <li>Drag-and-drop file select in FF, Chrome</li>
 <li>Uploads are cancellable</li>
 <li>No external dependencies</li>
