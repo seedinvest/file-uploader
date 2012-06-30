@@ -7,7 +7,7 @@ $allowedExtensions = array();
 // max file size in bytes
 $sizeLimit = 10 * 1024 * 1024;
 
-require('UploaderClass.php');
+// include('UploaderClass.php');
 $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
 
 // Call handleUpload() with the name of the folder, relative to PHP's getcwd()
