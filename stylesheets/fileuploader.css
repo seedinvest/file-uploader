@@ -152,7 +152,7 @@
 	color: #FFFFFF;
 }
 .qq-upload-list li.qq-upload-fail {
-	background-color: #AF0000;
+	background: #AF0000;
 	color: #FFFFFF;
 }
 .qq-upload-button:hover {
