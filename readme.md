@@ -85,6 +85,7 @@ If you can't find the one you need, check the readme.txt in the same folder.
     // this option isn't supported in all browsers
     sizeLimit: 0, // max size   
     minSizeLimit: 0, // min size
+    abortOnFailure: true, // Fail all files if one doesn't meet the criteria
     
     // set to true to output server response to console
     debug: false,
