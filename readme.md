@@ -1,3 +1,5 @@
+##### Notice: <br> This project made some improvements to Valum's initial AJAX uploader, but it is no longer actively maintained.  Some bugs may remain unfixed.  A commercial fork of this project (with a licencing fee) with many bugfixes is available at http://fineuploader.com/. <br> Interested maintainers for this project may post on the [issues forum](https://github.com/Valums-File-Uploader/file-uploader/issues).
+
 ### Valum's File Uploader v2.0 beta ###
 
 Welcome! This project attempts to achieve a user-friendly file-uploading experience over the web. 
