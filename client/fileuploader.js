@@ -645,7 +645,9 @@ qq.extend(qq.FileUploader.prototype, {
             }
         });
 
-		this.addDisposer(function() { dz.dispose(); });
+        this._dropZone = dz;
+
+        this.addDisposer(function() { dz.dispose(); });
 
         if (this._options.hideShowDropArea) {
             dropArea.style.display = 'none';
@@ -667,7 +669,7 @@ qq.extend(qq.FileUploader.prototype, {
 		if (!qq.ie()) {
 			this._attach(document, 'dragenter', function(e){
 				// console.log();
-				if (!self._isValidFileDrag(e)) return; // now causing error. Need it be here?
+				if (!self._dropZone._isValidFileDrag(e)) return; // now causing error. Need it be here?
 				if (qq.hasClass(dropArea, self._classes.dropDisabled)) return;
 
 				dropArea.style.display = 'block';        
@@ -1429,3 +1431,4 @@ qq.DisposeSupport = {
     this.addDisposer(qq.attach.apply(this, arguments));
   }
 };
+
