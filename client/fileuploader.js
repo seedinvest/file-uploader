@@ -1098,6 +1098,7 @@ qq.UploadHandlerForm = function(o){
 qq.extend(qq.UploadHandlerForm.prototype, qq.UploadHandlerAbstract.prototype);
 
 qq.extend(qq.UploadHandlerForm.prototype, {
+	_detach_event: new Object(),
     add: function(fileInput){
         fileInput.setAttribute('name', this._options.inputName);
         var id = 'qq-upload-handler-iframe' + qq.getUniqueId();
@@ -1156,7 +1157,8 @@ qq.extend(qq.UploadHandlerForm.prototype, {
             delete self._inputs[id];
             // timeout added to fix busy state in FF3.6
             setTimeout(function(){
-                self._detach_event();
+                self._detach_event[iframe.id]();
+				delete self._detach_event[iframe.id];
                 qq.remove(iframe);
             }, 1);
         });
@@ -1167,7 +1169,7 @@ qq.extend(qq.UploadHandlerForm.prototype, {
         return id;
     },
     _attachLoadEvent: function(iframe, callback){
-        this._detach_event = qq.attach(iframe, 'load', function(){
+        this._detach_event[iframe.id] = qq.attach(iframe, 'load', function(){
             // when we remove iframe from dom
             // the request stops, but in IE load
             // event fires
