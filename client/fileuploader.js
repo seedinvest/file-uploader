@@ -136,7 +136,7 @@ qq.toElement = (function(){
  * Fixes opacity in IE6-8.
  */
 qq.css = function(element, styles){
-    if (styles.opacity != null){
+    if (styles.opacity != null && typeof styles.opacity != 'undefined'){
         if (typeof element.style.opacity != 'string' && typeof(element.filters) != 'undefined'){
             styles.filter = 'alpha(opacity=' + Math.round(100 * styles.opacity) + ')';
         }
