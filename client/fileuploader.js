@@ -333,7 +333,8 @@ qq.FileUploaderBasic.prototype = {
             acceptFiles: this._options.acceptFiles,
             onChange: function(input){
                 self._onInputChange(input);
-            }
+            },
+            inputLabeledBy: $(this._options.element).attr('input-labeled-by')
         });
 
         this.addDisposer(function() { button.dispose(); });
@@ -937,6 +938,10 @@ qq.UploadButton.prototype = {
 
         input.setAttribute("type", "file");
         input.setAttribute("name", this._options.name);
+
+        if (this._options["inputLabeledBy"]) {
+            input.setAttribute("aria-labelledby", this._options["inputLabeledBy"]);
+        }
 
         qq.css(input, {
             position: 'absolute',
