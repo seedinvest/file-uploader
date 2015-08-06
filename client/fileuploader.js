@@ -409,11 +409,13 @@ qq.FileUploaderBasic.prototype = {
     _onUpload: function(id, fileName, xhr){
     },
     _onInputChange: function(input){
-        if (this._handler instanceof qq.UploadHandlerXhr){
-            this._uploadFileList(input.files);
-        } else {
-            if (this._validateFile(input)){
-                this._uploadFile(input);
+        if(!this._options.onInputChange || this._options.onInputChange(input)) {
+            if (this._handler instanceof qq.UploadHandlerXhr){
+                this._uploadFileList(input.files);
+            } else {
+                if (this._validateFile(input)){
+                    this._uploadFile(input);
+                }
             }
         }
         this._button.reset();
