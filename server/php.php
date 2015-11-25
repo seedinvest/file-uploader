@@ -130,7 +130,7 @@ class qqFileUploader {
     }
     
     /**
-     * Returns array('success'=>true) or array('error'=>'error message')
+     * Returns array('success' => true, 'newFilename' => 'myDoc123.doc') or array('error' => 'error message')
      */
     function handleUpload($uploadDirectory, $replaceOldFile = FALSE){
         if (!is_writable($uploadDirectory)){
