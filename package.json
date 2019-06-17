@@ -1,0 +1,23 @@
+{
+  "name": "file-uploader",
+  "version": "1.0.0",
+  "description": "### Valum's File Uploader v2.0 beta ###",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seedinvest/file-uploader.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seedinvest/file-uploader/issues"
+  },
+  "homepage": "https://github.com/seedinvest/file-uploader#readme"
+}

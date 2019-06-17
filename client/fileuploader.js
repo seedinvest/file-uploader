@@ -277,7 +277,7 @@ qq.FileUploaderBasic = function(o){
         maxConnections: 3,
         // validation
         allowedExtensions: [],
-        acceptFiles: null,		// comma separated string of mime-types for browser to display in browse dialog
+        acceptFiles: null,      // comma separated string of mime-types for browser to display in browse dialog
         sizeLimit: 0,
         minSizeLimit: 0,
         abortOnFailure: true, // Fail all files if one doesn't meet the criteria
@@ -288,7 +288,7 @@ qq.FileUploaderBasic = function(o){
         onComplete: function(id, fileName, responseJSON){},
         onCancel: function(id, fileName){},
         onUpload: function(id, fileName, xhr){},
-		onError: function(id, fileName, xhr) {},
+        onError: function(id, fileName, xhr) {},
         // messages
         messages: {
             typeError: "Unfortunately the file(s) you selected weren't the type we were expecting. Only {extensions} files are allowed.",
@@ -453,7 +453,7 @@ qq.FileUploaderBasic.prototype = {
         } else {
             // fix missing properties in Safari 4 and firefox 11.0a2
             name = (file.fileName !== null && file.fileName !== undefined) ? file.fileName : file.name;
-			size = (file.fileSize !== null && file.fileSize !== undefined) ? file.fileSize : file.size;
+            size = (file.fileSize !== null && file.fileSize !== undefined) ? file.fileSize : file.size;
         }
 
         if (! this._isAllowedExtension(name)){
@@ -494,8 +494,8 @@ qq.FileUploaderBasic.prototype = {
     },
     _isAllowedExtension: function(fileName){
         var ext = (-1 !== fileName.indexOf('.'))
-					? fileName.replace(/.*[.]/, '').toLowerCase()
-					: '';
+                    ? fileName.replace(/.*[.]/, '').toLowerCase()
+                    : '';
         var allowed = this._options.allowedExtensions;
 
         if (!allowed.length){return true;}
@@ -658,7 +658,7 @@ qq.extend(qq.FileUploader.prototype, {
     },
     _setupDragDrop: function(){
         var dropArea = this._find(this._element, 'drop');
-		var self = this;
+        var self = this;
         this._options.extraDropzones.push(dropArea);
 
         var dropzones = this._options.extraDropzones;
@@ -667,19 +667,19 @@ qq.extend(qq.FileUploader.prototype, {
             this._setupDropzone(dropzones[i]);
         }
 
-		// IE <= 9 does not support the File API used for drag+drop uploads
-		// Any volunteers to enable & test this for IE10?
-		if (!qq.ie()) {
-			this._attach(document, 'dragenter', function(e){
-				// console.log();
-				if (!self._dropZone._isValidFileDrag(e)) return; // now causing error. Need it be here?
-				if (qq.hasClass(dropArea, self._classes.dropDisabled)) return;
+        // IE <= 9 does not support the File API used for drag+drop uploads
+        // Any volunteers to enable & test this for IE10?
+        if (!qq.ie()) {
+            this._attach(document, 'dragenter', function(e){
+                // console.log();
+                if (!self._dropZone._isValidFileDrag(e)) return; // now causing error. Need it be here?
+                if (qq.hasClass(dropArea, self._classes.dropDisabled)) return;
 
-				dropArea.style.display = 'block';
-				for (i=0; i < dropzones.length; i++){ dropzones[i].style.display = 'block'; }
+                dropArea.style.display = 'block';
+                for (i=0; i < dropzones.length; i++){ dropzones[i].style.display = 'block'; }
 
-			});
-		}
+            });
+        }
         this._attach(document, 'dragleave', function(e){
             var relatedTarget = document.elementFromPoint(e.clientX, e.clientY);
             // only fire when leaving document out
@@ -699,7 +699,7 @@ qq.extend(qq.FileUploader.prototype, {
         qq.FileUploaderBasic.prototype._onSubmit.apply(this, arguments);
         this._addToList(id, fileName);
     },
-	// Update the progress bar & percentage as the file is uploaded
+    // Update the progress bar & percentage as the file is uploaded
     _onProgress: function(id, fileName, loaded, total){
         qq.FileUploaderBasic.prototype._onProgress.apply(this, arguments);
 
@@ -708,18 +708,18 @@ qq.extend(qq.FileUploader.prototype, {
         size.style.display = 'inline';
 
         var text;
-		var percent = Math.round(loaded / total * 100);
+        var percent = Math.round(loaded / total * 100);
 
         if (loaded != total) {
-			// If still uploading, display percentage
+            // If still uploading, display percentage
             text = percent + '% from ' + this._formatSize(total);
         } else {
-			// If complete, just display final size
+            // If complete, just display final size
             text = this._formatSize(total);
         }
 
-		// Update progress bar <span> tag
-		this._find(item, 'progressBar').style.width = percent + '%';
+        // Update progress bar <span> tag
+        this._find(item, 'progressBar').style.width = percent + '%';
 
         qq.setText(size, text);
     },
@@ -744,12 +744,12 @@ qq.extend(qq.FileUploader.prototype, {
         var fileElement = this._find(item, 'file');
         qq.setText(fileElement, this._formatFileName(fileName));
         this._find(item, 'size').style.display = 'none';
-		if (!this._options.multiple) this._clearList();
+        if (!this._options.multiple) this._clearList();
         this._listElement.appendChild(item);
     },
-	_clearList: function(){
-		this._listElement.innerHTML = '';
-	},
+    _clearList: function(){
+        this._listElement.innerHTML = '';
+    },
     _getItemByFileId: function(id){
         var item = this._listElement.firstChild;
 
@@ -868,10 +868,10 @@ qq.UploadDropZone.prototype = {
         });
     },
     _isValidFileDrag: function(e){
-		// e.dataTransfer currently causing IE errors
-		// IE9 does NOT support file API, so drag-and-drop is not possible
-		// IE10 should work, but currently has not been tested - any volunteers?
-		if (qq.ie()) return false;
+        // e.dataTransfer currently causing IE errors
+        // IE9 does NOT support file API, so drag-and-drop is not possible
+        // IE10 should work, but currently has not been tested - any volunteers?
+        if (qq.ie()) return false;
 
         var dt = e.dataTransfer,
             // do not check dt.types.contains in webkit, because it crashes safari 4
@@ -996,7 +996,7 @@ qq.UploadButton.prototype = {
  * Class for uploading files, uploading itself is handled by child classes
  */
 qq.UploadHandlerAbstract = function(o){
-	// Default options, can be overridden by the user
+    // Default options, can be overridden by the user
     this._options = {
         debug: false,
         action: '/upload.php',
@@ -1105,7 +1105,7 @@ qq.UploadHandlerForm = function(o){
 qq.extend(qq.UploadHandlerForm.prototype, qq.UploadHandlerAbstract.prototype);
 
 qq.extend(qq.UploadHandlerForm.prototype, {
-	_detach_event: new Object(),
+    _detach_event: new Object(),
     add: function(fileInput){
         fileInput.setAttribute('name', this._options.inputName);
         var id = 'qq-upload-handler-iframe' + qq.getUniqueId();
@@ -1165,7 +1165,7 @@ qq.extend(qq.UploadHandlerForm.prototype, {
             // timeout added to fix busy state in FF3.6
             setTimeout(function(){
                 self._detach_event[iframe.id]();
-				delete self._detach_event[iframe.id];
+                delete self._detach_event[iframe.id];
                 qq.remove(iframe);
             }, 1);
         });
@@ -1367,7 +1367,7 @@ qq.extend(qq.UploadHandlerXhr.prototype, {
             //NOTE: return mime type in xhr works on chrome 16.0.9 firefox 11.0a2
             xhr.setRequestHeader("X-Mime-Type",file.type );
         }
-        for (key in this._options.customHeaders){
+        for (var key in this._options.customHeaders){
             xhr.setRequestHeader(key, this._options.customHeaders[key]);
         };
         xhr.send(file);
@@ -1441,3 +1441,6 @@ qq.DisposeSupport = {
   }
 };
 
+export default {
+    qq
+}
